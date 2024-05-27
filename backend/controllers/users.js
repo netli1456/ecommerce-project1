@@ -115,7 +115,6 @@ export const addFollowers = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  
   const id = req.params.id;
   if (id) {
     try {
@@ -126,7 +125,7 @@ export const updateUser = async (req, res) => {
         },
         { new: true }
       );
-      const {password, ...others}= updatedUser._doc
+      const { password, ...others } = updatedUser._doc;
       await updatedUser.save();
       res.status(200).json(others);
     } catch (error) {
@@ -202,7 +201,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-
 export const updatePassword = async (req, res) => {
   const id = req.params.id;
 
@@ -217,7 +215,6 @@ export const updatePassword = async (req, res) => {
       const newPassword = req.body.password;
       const hashedPassword = bcrypt.hashSync(newPassword, 10);
 
-     
       user.password = hashedPassword;
 
       await user.save();
@@ -228,4 +225,3 @@ export const updatePassword = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
